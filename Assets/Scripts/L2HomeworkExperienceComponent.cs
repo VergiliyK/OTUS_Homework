@@ -4,16 +4,11 @@ using UnityEngine;
 public class L2HomeworkExperienceComponent : MonoBehaviour
 {
     #region Fields
-    [SerializeField]
-    private float _nextLevelLimitMultipier = 1.3f;
-    [SerializeField]
-    private int _levelExperienceLimit = 100;
-    [SerializeField]
-    private int _experience = 0;
-    [SerializeField]
-    private int _level = 0;
-    [SerializeField]
-    private int _levelUpsNumber = 0;
+    [SerializeField] private float _nextLevelLimitMultipier = 1.3f;
+    [SerializeField] private int _levelExperienceLimit = 100;
+    [SerializeField] private int _experience = 0;
+    [SerializeField] private int _level = 0;
+    [SerializeField] private int _levelUpsNumber = 0;
     #endregion
 
     #region Properties

@@ -144,5 +144,6 @@ public class L2HomeworkScript : MonoBehaviour
         ExperienceComponent.LevelUp();
         ExperienceComponent.GainExperience(ExperienceComponent.Experience * 3);
         ExperienceComponent.LevelUp();
+        ExperienceComponent.LevelUp();
     }
 }

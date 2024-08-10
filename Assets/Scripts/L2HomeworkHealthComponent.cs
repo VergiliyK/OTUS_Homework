@@ -3,10 +3,8 @@ using UnityEngine;
 public class L2HomeworkHealthComponent : MonoBehaviour
 {
     #region Fields
-    [SerializeField]
-    private float _health = 100;
-    [SerializeField]
-    private float _damageMultiplier = 1;
+    [SerializeField] private float _health = 100;
+    [SerializeField] private float _damageMultiplier = 1;
     #endregion
 
     #region Properties
