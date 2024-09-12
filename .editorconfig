@@ -1,0 +1,4 @@
+﻿[*.{cs,vb}]
+
+# IDE2003: Blank line required between block and subsequent statement
+dotnet_diagnostic.IDE2003.severity = suggestion
