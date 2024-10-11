@@ -7,46 +7,23 @@ namespace Assets.Scripts.SceneScripts
     {
         #region Fields
         [SerializeField] private Transform _characterTransform;
-        [SerializeField] private MeshRenderer _characterBodyRender;
         [SerializeField] private int _speed;
-        [SerializeField] private float _hightFarOffset;
-        [SerializeField] private float _hightCloseOffset;
-        [SerializeField] private float _backFarOffset;
-        [SerializeField] private float _backCloseOffset;
-        [SerializeField] private float _farRotationX;
-        [SerializeField] private float _closeRotationX;
+        [SerializeField] private float _hightOffset;
+        [SerializeField] private float _backOffset;
+        [SerializeField] private float _rotationX;
 
         public bool Stop = false;
-
-        private float _rotationX;
-        private float _hightOffset;
-        private bool _close;
-        private float _backOffset;
         #endregion
 
         #region Methods
         private void Start()
         {
             this.transform.position = this.GetNewPosition();
-            this._close = true;
-            this._backOffset = this._backCloseOffset;
-            this.SetDistanceSettings();
         }
 
         private void Update()
         {
-            if (Input.GetKeyUp(KeyCode.F))
-            {
-                this.ChangeDistance();
-            }
-
             this.MoveAndRotate();
-        }
-
-        private void ChangeDistance()
-        {
-            this._close = !this._close;
-            this.SetDistanceSettings();
         }
 
         private void MoveAndRotate()
@@ -60,14 +37,6 @@ namespace Assets.Scripts.SceneScripts
                 x: this._rotationX,
                 y: this._characterTransform.eulerAngles.y,
                 z: this._characterTransform.eulerAngles.z));
-        }
-
-        private void SetDistanceSettings()
-        {
-            this._backOffset = this._close ? this._backCloseOffset : this._backFarOffset;
-            this._hightOffset = this._close ? this._hightCloseOffset : this._hightFarOffset;
-            this._rotationX = this._close ? this._closeRotationX : this._farRotationX;
-            this._characterBodyRender.enabled = !this._close;
         }
 
         private Vector3 GetNewPosition()
