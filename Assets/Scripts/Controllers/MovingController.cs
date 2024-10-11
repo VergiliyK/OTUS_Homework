@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Controllers
 {
-    public sealed class MovingController : MonoBehaviour
+    public sealed class MovingController : MonoBehaviour, IMoving
     {
         #region Fields
         [SerializeField] private float _defaultSpeed;
@@ -10,6 +10,16 @@ namespace Assets.Scripts.Controllers
 
         private float _speed;
         private Vector3 _direction;
+        #endregion
+
+        #region Properties
+        public bool Moving
+        {
+            get
+            {
+                return this._direction != Vector3.zero;
+            }
+        }
         #endregion
 
         #region Methods
@@ -26,34 +36,34 @@ namespace Assets.Scripts.Controllers
                 this._speed *= this._runMultiplyer;
             }
 
-            this._direction.Normalize();
-            this.transform.Translate(this._speed * Time.deltaTime * this.GetDirectionByKeys());
-            this._speed = 0;
+            this.SetDirectionByKeys();
+            this.transform.Translate(this._speed * Time.deltaTime * this._direction);
         }
-        private Vector3 GetDirectionByKeys()
+        private void SetDirectionByKeys()
         {
-            Vector3 direction = Vector3.zero;
             if (Input.GetKey(KeyCode.W))
             {
-                direction += Vector3.forward;
+                this._direction += Vector3.forward;
             }
-
-            if (Input.GetKey(KeyCode.S))
+            else if (Input.GetKey(KeyCode.S))
             {
-                direction -= Vector3.forward;
+                this._direction -= Vector3.forward;
             }
-
-            if (Input.GetKey(KeyCode.D))
+            else if (Input.GetKey(KeyCode.D))
             {
-                direction += Vector3.right;
+                this._direction += Vector3.right;
             }
-
-            if (Input.GetKey(KeyCode.A))
+            else if (Input.GetKey(KeyCode.A))
             {
-                direction -= Vector3.right;
+                this._direction -= Vector3.right;
+            }
+            else
+            {
+                this._direction = Vector3.zero;
+                return;
             }
 
-            return direction;
+            this._direction.Normalize();
         }
 
         private void OnValidate()
@@ -68,6 +78,7 @@ namespace Assets.Scripts.Controllers
                 this._runMultiplyer = 1;
             }
         }
+
         #endregion
     }
 }
